@@ -1,5 +1,5 @@
 {
-  "name": "thrux",
+  "name": "react-native-thrux-router",
   "version": "0.0.0-development",
   "description": "Simple state management.",
   "main": "src/index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Thram/thrux.git"
+    "url": "https://github.com/Thram/react-native-thrux-router.git"
   },
   "keywords": [
     "react",
@@ -20,9 +20,9 @@
   "author": "Thram <thramposo@gmail.com> (https://thram.github.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Thram/thrux/issues"
+    "url": "https://github.com/Thram/react-native-thrux-router/issues"
   },
-  "homepage": "https://github.com/Thram/thrux#readme",
+  "homepage": "https://github.com/Thram/react-native-thrux-router#readme",
   "dependencies": {
     "lodash": "^4.17.4",
     "react": "~15.4.2",
