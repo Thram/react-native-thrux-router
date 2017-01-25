@@ -1,0 +1,44 @@
+{
+  "name": "thrux",
+  "version": "0.0.0-development",
+  "description": "Simple state management.",
+  "main": "src/index.js",
+  "scripts": {
+    "commit": "git add . && git-cz",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thram/thrux.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "thrux",
+    "router"
+  ],
+  "author": "Thram <thramposo@gmail.com> (https://thram.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Thram/thrux/issues"
+  },
+  "homepage": "https://github.com/Thram/thrux#readme",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "react": "~15.4.2",
+    "react-native": "0.40.0",
+    "thrux": "^2.2.6"
+  },
+  "devDependencies": {
+    "commitizen": "^2.9.5",
+    "cz-conventional-changelog": "^1.2.0",
+    "ghooks": "^2.0.0",
+    "npm-run-all": "^4.0.1",
+    "semantic-release": "^6.3.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
