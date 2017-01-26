@@ -7,7 +7,7 @@ import last from 'lodash/last';
 import find from 'lodash/find';
 import React, {Component, PropTypes} from 'react';
 import {View, Text, Navigator, TouchableOpacity, BackAndroid, Platform, Modal, StatusBar} from 'react-native';
-import {register, state, createDict, observe, dispatch} from "thrux";
+import {register, clearObservers, state, createDict, observe, dispatch} from "thrux";
 import Scene from "./Scene";
 
 let _routes;
@@ -20,8 +20,10 @@ register({
     })),
     GO_ROUTE   : createDict((route, state) => {
       if (route) {
-        const stack = state && state.stack ? state.stack : [];
-        stack.push(route);
+        let stack = state && state.stack ? state.stack : [];
+        route.reset ? stack = [route]
+            : (route.replace ? stack[stack.length - 1] = route
+                : stack.push(route));
         return {stack, current: route};
       }
     }),
@@ -74,6 +76,9 @@ export default class Router extends Component {
     super(props);
     _routes = this.props.routes;
     dispatch('router:INIT', _routes[0]);
+  }
+
+  componentDidMount() {
     observe('router', ({stack, current, modal}, action) => {
       switch (action) {
         case 'OPEN_MODAL':
@@ -86,7 +91,9 @@ export default class Router extends Component {
           this.refs.nav.pop();
           break;
         default:
-          this.refs.nav.push(current);
+          current.reset ? this.refs.nav.resetTo(current)
+              : (current.replace ? this.refs.nav.replace(current)
+                  : this.refs.nav.push(current));
       }
     });
 
@@ -99,6 +106,8 @@ export default class Router extends Component {
       });
     }
   }
+
+  componentWillUnmount = () => clearObservers('router');
 
   render() {
     const props = assign({
