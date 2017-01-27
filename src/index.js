@@ -31,10 +31,16 @@ register({
       state.stack.length > 1 && state.stack.pop();
       return {stack: state.stack, current: last(state.stack)};
     }),
+    SET_TAB    : createDict((tab, state) => {
+      state.current.tab = tab;
+      return assign({}, state)
+    }),
     OPEN_MODAL : createDict((modal, state) => assign({}, state, {modal})),
     CLOSE_MODAL: createDict((payload, state) => omit(state, 'modal'))
   }
 });
+
+export const setTab = (tab) => dispatch('router:SET_TAB', tab);
 
 export const goBack = () => dispatch('router:BACK');
 
@@ -81,6 +87,8 @@ export default class Router extends Component {
   componentDidMount() {
     observe('router', ({stack, current, modal}, action) => {
       switch (action) {
+        case 'SET_TAB':
+          break;
         case 'OPEN_MODAL':
           this.setState({modal});
           break;
@@ -91,6 +99,7 @@ export default class Router extends Component {
           this.refs.nav.pop();
           break;
         default:
+          this.setState({modal: undefined});
           current.reset ? this.refs.nav.resetTo(current)
               : (current.replace ? this.refs.nav.replace(current)
                   : this.refs.nav.push(current));
@@ -127,6 +136,7 @@ export default class Router extends Component {
           ReactComponent              = this.state.modal.component,
           modalProps                  = assign({
             animationType: animation,
+            transparent  : true,
             visible
           }, Platform.OS === 'android' && {onRequestClose: closeModal});
 
