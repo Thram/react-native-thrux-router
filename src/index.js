@@ -19,12 +19,14 @@ register({
       current: route
     })),
     GO_ROUTE   : createDict((route, state) => {
-      if (route) {
+      if (route && route.id != state.current.id) {
         let stack = state && state.stack ? state.stack : [];
         route.reset ? stack = [route]
             : (route.replace ? stack[stack.length - 1] = route
                 : stack.push(route));
         return {stack, current: route};
+      } else {
+        return state;
       }
     }),
     BACK       : createDict((payload, state) => {
@@ -44,14 +46,16 @@ export const setTab = (tab) => dispatch('router:SET_TAB', tab);
 
 export const goBack = () => dispatch('router:BACK');
 
-export const goRoute = (routeId) => dispatch('router:GO_ROUTE', find(_routes, {id: routeId}));
+export const goRoute = (routeId, options) => dispatch('router:GO_ROUTE', assign({}, find(_routes, {id: routeId}), options));
 
-export const goNextRoute = () => goRoute(state('router').current.next);
+export const goNextRoute = (options) => goRoute(state('router').current.next, options);
 
 export const openModal = ({component, animation = "slide", style = {flex: 1}, visible = true, props}) =>
     dispatch('router:OPEN_MODAL', {component, animation, style, visible, props});
 
 export const closeModal = () => dispatch('router:CLOSE_MODAL');
+
+export const getCurrentProps = () => state('router').current.props || {};
 
 
 export default class Router extends Component {
@@ -65,12 +69,12 @@ export default class Router extends Component {
     LeftButton: (route, navigator, index, navState) => this.props.leftButton ?
         this.props.leftButton(route, navigator, index, navState)
         : (index === 0 ? undefined
-            : (<TouchableOpacity onPress={()=> dispatch('router:BACK')}>
+            : (<TouchableOpacity onPress={() => dispatch('router:BACK')}>
               {this.props.backButton || <Text>Back</Text>}
             </TouchableOpacity>)),
 
     RightButton: (route, navigator, index, navState) => this.props.rightButton ? this.props.rightButton(route, navigator, index, navState) : (
-            <TouchableOpacity onPress={()=> dispatch('router:BACK')}>
+            <TouchableOpacity onPress={() => dispatch('router:BACK')}>
               {this.props.backButton || <Text>Back</Text>}
             </TouchableOpacity>),
 
@@ -148,9 +152,9 @@ export default class Router extends Component {
   };
 
   navigatorRenderScene = (route, navigator) => (
-      <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
+      <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
         <StatusBar hidden={!!this.props.hideStatusBar}/>
-        <Scene style={{flex:1}} {...route}/>
+        <Scene style={{flex: 1}} {...route}/>
         {this.state.modal && this.renderModal()}
       </View>)
 }
