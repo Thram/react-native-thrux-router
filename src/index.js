@@ -24,7 +24,7 @@ register({
         route.reset ? stack = [route]
             : (route.replace ? stack[stack.length - 1] = route
                 : stack.push(route));
-        return {stack, current: route};
+        return {stack, current: route, modal: undefined};
       } else {
         return state;
       }
