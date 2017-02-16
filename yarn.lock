@@ -976,9 +976,9 @@ commander@~2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.1.0.tgz#d121bbae860d9992a3d517ba96f56588e47c6781"
 
-commitizen@^2.9.5:
-  version "2.9.5"
-  resolved "https://registry.yarnpkg.com/commitizen/-/commitizen-2.9.5.tgz#f9605c8c1170eef86331676b5b5f12ab595bf498"
+commitizen@^2.9.6:
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/commitizen/-/commitizen-2.9.6.tgz#c0d00535ef264da7f63737edfda4228983fa2291"
   dependencies:
     cachedir "^1.1.0"
     chalk "1.1.3"
@@ -993,7 +993,7 @@ commitizen@^2.9.5:
     lodash "4.17.2"
     minimist "1.2.0"
     path-exists "2.1.0"
-    shelljs "0.7.5"
+    shelljs "0.7.6"
     strip-json-comments "2.0.1"
 
 compressible@~2.0.5:
@@ -3624,9 +3624,9 @@ shell-quote@1.6.1, shell-quote@^1.6.1:
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
 
-shelljs@0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.5.tgz#2eef7a50a21e1ccf37da00df767ec69e30ad0675"
+shelljs@0.7.6:
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.6.tgz#379cccfb56b91c8601e4793356eb5382924de9ad"
   dependencies:
     glob "^7.0.0"
     interpret "^1.0.0"
@@ -3842,9 +3842,9 @@ through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
-thrux@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/thrux/-/thrux-2.4.1.tgz#c9bbc226a541b4c1d0fb79fb42c442e5879cc2e0"
+thrux@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/thrux/-/thrux-2.5.4.tgz#e449b6bfcc3d9b4923029e117d17e5b5eb0202d4"
   dependencies:
     lodash "^4.17.4"
 

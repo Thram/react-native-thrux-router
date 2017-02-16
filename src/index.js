@@ -44,7 +44,7 @@ register({
 
 export const setTab = (tab) => dispatch('router:SET_TAB', tab);
 
-export const goBack = () => dispatch('router:BACK');
+export const goBack = () => state('router').modal ? dispatch('router:CLOSE_MODAL') : dispatch('router:BACK');
 
 export const goRoute = (routeId, options) => dispatch('router:GO_ROUTE', assign({}, find(_routes, {id: routeId}), options));
 

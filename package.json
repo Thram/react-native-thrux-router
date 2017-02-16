@@ -25,10 +25,10 @@
   "homepage": "https://github.com/Thram/react-native-thrux-router#readme",
   "dependencies": {
     "lodash": "^4.17.4",
-    "thrux": "^2.4.1"
+    "thrux": "^2.5.4"
   },
   "devDependencies": {
-    "commitizen": "^2.9.5",
+    "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^1.2.0",
     "ghooks": "^2.0.0",
     "npm-run-all": "^4.0.1",
