@@ -30,7 +30,7 @@
   "devDependencies": {
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
-    "ghooks": "^2.0.0",
+    "husky": "^0.13.1",
     "npm-run-all": "^4.0.2",
     "react": "^15.4.2",
     "react-native": "^0.41.2",
