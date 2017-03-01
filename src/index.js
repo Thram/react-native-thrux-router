@@ -61,22 +61,20 @@ class ModalContainer extends Component {
 
   state = {visible: false};
 
+  defaultProps = assign({transparent: true}, Platform.OS === 'android' && {onRequestClose: closeModal});
+
   setModalVisible = (visible) => this.setState({visible});
 
   componentDidMount() {
     const {animation, visible, props:componentProps} = this.props,
-          modalProps                                 = assign({
-            animationType: animation,
-            transparent  : true
-          }, Platform.OS === 'android' && {onRequestClose: closeModal});
-
+          modalProps                                 = {animationType: animation};
     this.setState({visible, modalProps, componentProps})
   }
 
   render = () => {
     const ReactComponent = this.props.component;
     return (
-        <Modal visible={this.state.visible} {...this.state.modalProps}>
+        <Modal visible={this.state.visible} {...this.state.modalProps} {...this.defaultProps}>
           <ReactComponent {...this.state.componentProps}/>
         </Modal>
     );
