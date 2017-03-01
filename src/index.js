@@ -57,6 +57,32 @@ export const closeModal = () => dispatch('router:CLOSE_MODAL');
 
 export const getCurrentProps = () => state('router').current.props || {};
 
+class ModalContainer extends Component {
+
+  state = {visible: false};
+
+  setModalVisible = (visible) => this.setState({visible});
+
+  componentDidMount() {
+    const {animation, visible, props:componentProps} = this.props,
+          modalProps                                 = assign({
+            animationType: animation,
+            transparent  : true
+          }, Platform.OS === 'android' && {onRequestClose: closeModal});
+
+    this.setState({visible, modalProps, componentProps})
+  }
+
+  render = () => {
+    const ReactComponent = this.props.component;
+    return (
+        <Modal visible={this.state.visible} {...this.state.modalProps}>
+          <ReactComponent {...this.state.componentProps}/>
+        </Modal>
+    );
+  };
+}
+
 
 export default class Router extends Component {
   static propTypes = {
@@ -97,7 +123,9 @@ export default class Router extends Component {
           this.setState({modal});
           break;
         case 'CLOSE_MODAL':
-          this.setState({modal: undefined});
+          this.refs.nav.refs.modal.setModalVisible(false);
+          this.setState({modal: undefined, modal_closing: true});
+          setTimeout(() => this.setState({modal_closing: false}), 0);
           break;
         case 'BACK':
           this.refs.nav.pop();
@@ -135,26 +163,10 @@ export default class Router extends Component {
     return (<Navigator ref="nav" {...props}/>);
   }
 
-  renderModal = () => {
-    const {animation, visible, props} = this.state.modal,
-          ReactComponent              = this.state.modal.component,
-          modalProps                  = assign({
-            animationType: animation,
-            transparent  : true,
-            visible
-          }, Platform.OS === 'android' && {onRequestClose: closeModal});
-
-    return (
-        <Modal {...modalProps}>
-          <ReactComponent {...props}/>
-        </Modal>
-    );
-  };
-
   navigatorRenderScene = (route, navigator) => (
       <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
         <StatusBar hidden={!!this.props.hideStatusBar}/>
         <Scene style={{flex: 1}} {...route}/>
-        {this.state.modal && this.renderModal()}
+        {this.state.modal && !this.state.modal_closing && <ModalContainer ref="modal" {...this.state.modal}/>}
       </View>)
 }
