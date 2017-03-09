@@ -162,8 +162,8 @@ export default class Router extends Component {
   }
 
   navigatorRenderScene = (route, navigator) => (
-      <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
-        <StatusBar hidden={!!this.props.hideStatusBar}/>
+      <View style={{flex: 1, backgroundColor: (this.props.backgroundColor || '#FFFFFF')}}>
+        <StatusBar hidden={!!this.props.hideStatusBar} {...(route.statusBar || this.props.statusBar)}/>
         <Scene style={{flex: 1}} {...route}/>
         {this.state.modal && !this.state.modal_closing && <ModalContainer ref="modal" {...this.state.modal}/>}
       </View>)
