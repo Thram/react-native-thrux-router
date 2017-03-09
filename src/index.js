@@ -138,7 +138,7 @@ export default class Router extends Component {
 
     if (Platform.OS === 'android') {
       BackAndroid.addEventListener('hardwareBackPress', () => {
-        if (this.refs.nav.getCurrentRoutes().length === 1)
+        if (state('router').stack.length === 1)
           return false;
         goBack();
         return true;
