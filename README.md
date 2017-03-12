@@ -17,15 +17,18 @@ import React, {Component} from 'react';
 import First from "./First";
 import Second from "./Second";
 
+const styleBarWhite = Platform.OS === 'android' ? {barStyle: "light-content", backgroundColor: 'rgba(0,0,0,.3)'} : {barStyle: "dark-content"};
+const styleBarDark  = assign({barStyle: "light-content"}, Platform.OS === 'android' ? {backgroundColor: '#414141'} : {});
+
 const routes = [
   {id: 'first', title: 'First Scene', component: First, next: 'second'},
-  {id: 'second', title: 'Second Scene', component: Second, next: 'third'},
+  {id: 'second', title: 'Second Scene', component: Second, replace: true, statusBar: styleBarDark},
   {id: 'third', title: 'Third Scene', component: Second, next: 'forth'},
   {id: 'forth', title: 'Forth Scene', component: First}
 ];
 
 export default class NavigationExample extends Component {
-  render = () => (<Router routes={routes} hideNav hideStatusBar/>)
+  render = () => (<Router routes={routes} hideNav statusBar={styleBarWhite}/>)
 }
 ```
 
@@ -57,14 +60,14 @@ export default class First extends Component {
 ```javascript
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
-import {goNextRoute, goBack, openModal} from "react-native-thrux-router";
+import {goRoute, goBack, openModal} from "react-native-thrux-router";
 import ThirdModal from './ThirdModal';
 
 export default class Second extends Component {
   render() {
     return (
         <View style={{flex:1, backgroundColor:'#EEAA00', justifyContent:'center'}}>
-          <TouchableOpacity onPress={goNextRoute}>
+          <TouchableOpacity onPress={()=> goRoute('third')}>
             <Text> Second screen </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={()=> openModal({component:ThirdModal})}>
