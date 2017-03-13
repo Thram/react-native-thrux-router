@@ -1,9 +1,10 @@
 {
   "name": "react-native-thrux-router",
   "version": "0.0.0-development",
-  "description": "React Native router using [Thrux](https://github.com/Thram/thrux) state manager.",
+  "description": "ReactNative Router using [Thrux](https://github.com/Thram/thrux) state manager.",
   "main": "src/index.js",
   "scripts": {
+    "test":"",
     "commit": "git add . && git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
