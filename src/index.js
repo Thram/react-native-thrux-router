@@ -153,7 +153,7 @@ export default class Router extends Component {
       initialRoute     : _routes[0],
       initialRouteStack: _routes,
       renderScene      : this.navigatorRenderScene,
-      configureScene   : assign({}, this.props.sceneConfig || Navigator.SceneConfigs.PushFromRight, {gestures: {}})
+      configureScene   : (route, routeStack) => assign({}, this.props.sceneConfig || Navigator.SceneConfigs.PushFromRight, {gestures: {}})
     }, !this.props.hideNav && {
           navigationBar: <Navigator.NavigationBar routeMapper={this.NavigationBarRouteMapper}/>,
           style        : {paddingTop: 40}
