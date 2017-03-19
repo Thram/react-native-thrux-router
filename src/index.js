@@ -10,7 +10,7 @@ import {View, Text, Navigator, TouchableOpacity, BackAndroid, Platform, Modal, S
 import {register, clearObservers, state, createDict, observe, dispatch} from "thrux";
 import Scene from "./Scene";
 
-let _routes;
+let _routes, _onBeforeBack;
 
 register({
   router: {
@@ -44,7 +44,14 @@ register({
 
 export const setTab = (tab) => dispatch('router:SET_TAB', tab);
 
-export const goBack = () => state('router').modal ? dispatch('router:CLOSE_MODAL') : dispatch('router:BACK');
+export const onBeforeBack = (func) => _onBeforeBack = func;
+
+
+const shouldGoBack = (func) => _onBeforeBack ?
+    _onBeforeBack((result) => (result === undefined || result) && func())
+    : func();
+
+export const goBack = () => state('router').modal ? dispatch('router:CLOSE_MODAL') : shouldGoBack(() => dispatch('router:BACK'));
 
 export const goRoute = (routeId, options) => dispatch('router:GO_ROUTE', assign({}, find(_routes, {id: routeId}), options));
 
@@ -93,12 +100,12 @@ export default class Router extends Component {
     LeftButton: (route, navigator, index, navState) => this.props.leftButton ?
         this.props.leftButton(route, navigator, index, navState)
         : (index === 0 ? undefined
-            : (<TouchableOpacity onPress={() => dispatch('router:BACK')}>
+            : (<TouchableOpacity onPress={goBack}>
               {this.props.backButton || <Text>Back</Text>}
             </TouchableOpacity>)),
 
     RightButton: (route, navigator, index, navState) => this.props.rightButton ? this.props.rightButton(route, navigator, index, navState) : (
-            <TouchableOpacity onPress={() => dispatch('router:BACK')}>
+            <TouchableOpacity onPress={goBack}>
               {this.props.backButton || <Text>Back</Text>}
             </TouchableOpacity>),
 
@@ -126,9 +133,11 @@ export default class Router extends Component {
           setTimeout(() => this.setState({modal_closing: false}), 0);
           break;
         case 'BACK':
+          if (_onBeforeBack) _onBeforeBack = undefined;
           this.refs.nav.pop();
           break;
         default:
+
           this.setState({modal: undefined});
           current.reset ? this.refs.nav.resetTo(current)
               : (current.replace ? this.refs.nav.replace(current)
