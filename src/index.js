@@ -137,7 +137,7 @@ export default class Router extends Component {
           this.refs.nav.pop();
           break;
         default:
-
+          if (_onBeforeBack) _onBeforeBack = undefined;
           this.setState({modal: undefined});
           current.reset ? this.refs.nav.resetTo(current)
               : (current.replace ? this.refs.nav.replace(current)
