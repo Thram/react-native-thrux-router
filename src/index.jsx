@@ -122,7 +122,7 @@ export default class Router extends Component {
           this.setState({ modal });
           break;
         case 'CLOSE_MODAL':
-          this.nav.refs.modal.setModalVisible(false);
+          this.nav.modal.setModalVisible(false);
           this.setState({ modal: undefined, modal_closing: true });
           setTimeout(() => this.setState({ modal_closing: false }), 0);
           break;
