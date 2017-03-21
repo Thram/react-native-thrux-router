@@ -27,11 +27,11 @@
     "url": "https://github.com/Thram/react-native-thrux-router/issues"
   },
   "homepage": "https://github.com/Thram/react-native-thrux-router#readme",
-  "dependencies": {
+  "peerDependencies": {
     "lodash": "^4.17.4",
     "thrux": "^3.0.5",
-    "react": ">=15.4.2",
-    "react-native": ">=0.42"
+    "react": ">=15.4.0",
+    "react-native": ">=0.40"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.0",
