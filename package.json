@@ -5,10 +5,11 @@
   "main": "src/index.jsx",
   "scripts": {
     "precommit": "npm run lint",
+    "dependencies": "npm install lodash thrux react react-native",
     "lint": "eslint src --ext .jsx,.js",
     "lint:test": "eslint __test__ --ext .js",
     "test": "",
-    "commit": "git add . && git-cz",
+    "gitc": "git add . && git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -34,7 +35,7 @@
     "react-native": ">=0.40"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.0",
+    "babel-eslint": "^7.2.1",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^3.18.0",
@@ -42,7 +43,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "husky": "^0.13.2",
+    "husky": "^0.13.3",
     "npm-run-all": "^4.0.2",
     "semantic-release": "^6.3.2"
   },
