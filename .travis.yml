@@ -13,6 +13,7 @@ node_js:
   - '4'
 before_script:
   - npm prune
+  - npm run dependencies
 after_success:
   - npm run semantic-release
 branches:
