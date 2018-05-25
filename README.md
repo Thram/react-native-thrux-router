@@ -3,7 +3,7 @@
 [![Travis build](https://img.shields.io/travis/Thram/react-native-thrux-router.svg?style=flat-square)](https://travis-ci.org/Thram/react-native-thrux-router)
 [![version](https://img.shields.io/npm/v/react-native-thrux-router.svg?style=flat-square)](https://www.npmjs.com/package/react-native-thrux-router)
 [![downloads](https://img.shields.io/npm/dt/react-native-thrux-router.svg?style=flat-square)](https://www.npmjs.com/package/react-native-thrux-router)
-[![MIT License](https://img.shields.io/npm/l/react-native-thrux-router.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![MIT License](https://img.shields.io/npm/l/react-native-thrux-router.svg?style=flat-square)](https://opensource.org/licenses/MIT) [![Greenkeeper badge](https://badges.greenkeeper.io/Thram/react-native-thrux-router.svg)](https://greenkeeper.io/)
 
 Router using [Thrux](https://github.com/Thram/thrux) state manager.
 
